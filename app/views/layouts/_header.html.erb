@@ -1,0 +1,31 @@
+<header class="navbar fixed-top bg-dark navbar-dark">
+  <!-- Bootstrap: Tạo thanh điều hướng (`navbar`).
+       - `navbar-fixed-top`: Giữ thanh cố định trên cùng khi cuộn trang.
+       - `navbar-inverse`: Đổi màu navbar thành tối (thay vì mặc định sáng). -->
+
+    <div class="container">
+    <!-- Bootstrap: Dùng `.container` để căn giữa nội dung và giới hạn chiều rộng của thanh navbar. -->
+      <%= link_to "Training App", '#', id: "logo" %>
+      <!-- ERB: Dùng `link_to` để tạo một liên kết đến trang chính (hiện tại là `#`, placeholder).
+           - `"sample app"`: Văn bản hiển thị trong liên kết.
+           - `id: "logo"`: Gán ID `"logo"` để có thể tùy chỉnh bằng CSS. -->
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- Bootstrap:
+               - `navbar-expand-lg`: Mở rộng thanh điều hướng 
+        <!-- Bootstrap:
+             - `nav`: Chỉ định đây là thanh điều hướng.
+             - `navbar-nav`: Áp dụng kiểu danh sách điều hướng của Bootstrap.
+             - `navbar-right`: Căn menu về bên phải navbar. -->
+
+          <li><%= link_to "Home", '#' %> |</li>
+          <!-- ERB: Tạo liên kết đến trang Home (hiện tại là `#`, chưa có URL thực). -->
+          <li><%= link_to "Help", '#' %> |</li>
+          <!-- ERB: Tạo liên kết đến trang Help. -->
+          <li><%= link_to "Log in", '#' %></li>
+          <!-- ERB: Tạo liên kết đến trang đăng nhập. -->
+        </ul>
+      </nav>
+    </div>
+</header>
