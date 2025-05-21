@@ -1,6 +1,31 @@
-<% provide(:title, "Home") %>
-<h1 style="color:salmon; text-align:center; background-color:aliceblue">Sample App</h1>
-<p style="text-align:center">
-    This is the home page for the <a href="https://www.railstutorial.org/"><em>Ruby on Rails Tutorial</em> 2025</a>
-    sample application.
-</p>
+<div class="center jumbotron">
+    <!-- Bootstrap: `jumbotron` giúp tạo một khối lớn làm nổi bật nội dung.
+         - `center`: Căn giữa nội dung trong jumbotron. -->
+  <h1>Welcome to the Sample App</h1>
+  <!-- Tiêu đề chính của trang web. -->
+    <h2>
+      This is the home page for the
+      <a href="https://www.railstutorial.org/">Ruby on Rails Tutorial</a>
+      sample application.
+    </h2>
+    <!-- Mô tả ngắn gọn về ứng dụng, kèm liên kết đến tài liệu Ruby on Rails. -->
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+    <!-- ERB: Tạo nút đăng ký bằng Bootstrap.
+           - `link_to`: Tạo thẻ `<a>`.
+           - `"Sign up now!"`: Văn bản hiển thị.
+           - `'#'`: URL tạm thời, sẽ thay bằng đường dẫn thực sau.
+           - `class: "btn btn-lg btn-primary"`:
+             * `btn`: Biến liên kết thành nút.
+             * `btn-lg`: Tăng kích thước nút.
+             * `btn-primary`: Nút màu xanh đặc trưng của Bootstrap. -->
+</div>
+  <%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200"),
+  "https://rubyonrails.org/" %>
+  <!-- ERB:
+         - `image_tag("rails.svg", alt: "Rails logo", width: "200")`: Tạo ảnh.
+         - `alt: "Rails logo"`: Nếu ảnh không hiển thị, văn bản thay thế sẽ là "Rails logo".
+         - `width: "200"`: Điều chỉnh kích thước ảnh về 200px.
+         - `link_to ...`: Bọc ảnh trong `<a>`, giúp khi click vào ảnh sẽ dẫn đến `https://rubyonrails.org/`. 
+   HTML tương ứng: <img alt="Rails logo" width="200px" src="/assets/rails-<long string>.svg">
+         - Đây là ảnh Rails nhưng có mã checksum hoặc fingerprint.
+         - Rails tự động thêm thông tin này để quản lý cache và tối ưu hóa tải trang. -->

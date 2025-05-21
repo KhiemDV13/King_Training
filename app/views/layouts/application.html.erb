@@ -1,29 +1,52 @@
 <!DOCTYPE html>
+<!-- Khai báo rằng tài liệu này sử dụng tiêu chuẩn HTML5. -->
 <html>
-  <head>
-    <title><%= yield :title %> | Ruby on Rails Tutorial Sample App</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta charset="utf-8">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= yield :head %>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title><%= full_title(yield(:title)) %></title>
+  <!-- ERB: Gọi phương thức `full_title(yield(:title))` để tạo tiêu đề trang động.
+       `yield(:title)` lấy giá trị tiêu đề từ từng trang con (`home.html.erb`, `about.html.erb`, v.v.). -->
+  <meta charset="utf-8">
+  <!-- Include Bootstrap  CSS and JS -->
+  <!-- Bootstrap: Thư viện CSS và JS giúp tạo giao diện đẹp và tương tác mượt mà. --> 
+  <!-- Sử dụng CDN để tải Bootstrap từ jsDelivr. -->
+  <!-- CDN: Tải Bootstrap từ jsDelivr, giúp giảm thời gian tải trang. -->
+  <!-- `integrity` và `crossorigin` là các thuộc tính bảo mật giúp đảm bảo tệp tải xuống không bị thay đổi. -->
+  <!-- `integrity`: Kiểm tra tính toàn vẹn của tệp tải xuống. -->
+  <!-- `crossorigin`: Xác định cách trình duyệt xử lý các yêu cầu CORS (Cross-Origin Resource Sharing). -->
+  <!-- `rel`: Xác định mối quan hệ giữa tài liệu hiện tại và tài liệu được liên kết. -->
+  <!-- `href`: Đường dẫn đến tệp CSS hoặc JS. -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  <!-- Định dạng ký tự là UTF-8, giúp hiển thị tiếng Việt, tiếng Anh và các ký tự đặc biệt đúng cách. -->
+  <%= csrf_meta_tags %>
+  <!-- ERB: Rails tự động tạo meta tags để bảo vệ trang khỏi tấn công CSRF (Cross-Site Request Forgery). -->
+  <%= csp_meta_tag %>
+  <!-- ERB: Bảo vệ trang web khỏi các tấn công XSS (Cross-Site Scripting) bằng cách kiểm soát nội dung được tải. -->
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <!-- ERB: Chèn file CSS `application.css`, giúp thiết kế giao diện trang web. 
+       `data-turbolinks-track: 'reload'` đảm bảo CSS được tải lại khi dùng Turbolinks. -->
+  <!-- ERB: Chèn file JavaScript `application.js` vào trang, xử lý hành vi và tương tác. -->
+  <!-- Nếu trình duyệt là Internet Explorer dưới phiên bản 9, tải thư viện hỗ trợ HTML5 -->
+  <!-- Điều này giúp IE cũ hiển thị đúng các thẻ HTML5. -->
+  <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
+  <![endif]-->
+  <%= render 'layouts/shim'%>
+</head>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
-
-  <body>
+<body>
+  <%= render 'layouts/header'%>
+  <div class="container">
+  <!-- Bootstrap: `.container` giúp căn giữa nội dung chính và tạo khoảng cách đẹp với lề trang. -->
     <%= yield %>
-  </body>
+    <!-- ERB: `yield` sẽ hiển thị nội dung từ từng trang cụ thể (`home.html.erb`, `about.html.erb`, v.v.). -->
+    <%= render 'layouts/footer'%>
+    <!-- ERB: Chèn footer vào trang, chứa thông tin bản quyền và liên kết đến tài liệu. --> 
+  </div>
+</body>
 </html>
+
