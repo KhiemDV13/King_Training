@@ -35,3 +35,4 @@
 
 # Ignore db test files.
 db/test.*
+node_modules/
