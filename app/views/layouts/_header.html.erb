@@ -19,12 +19,18 @@
              - `navbar-nav`: Áp dụng kiểu danh sách điều hướng của Bootstrap.
              - `navbar-right`: Căn menu về bên phải navbar. -->
 
-          <li><%= link_to "Home", '#' %> |</li>
+          <li><%= link_to "Home", root_path %> |</li>
           <!-- ERB: Tạo liên kết đến trang Home (hiện tại là `#`, chưa có URL thực). -->
-          <li><%= link_to "Help", '#' %> |</li>
+          <li><%= link_to "Help", help_path %> |</li>
           <!-- ERB: Tạo liên kết đến trang Help. -->
-          <li><%= link_to "Log in", '#' %></li>
-          <!-- ERB: Tạo liên kết đến trang đăng nhập. -->
+          <li><%= link_to "About", about_path %></li>
+          <!-- ERB: Tạo liên kết đến trang about. -->
+          <li><%= link_to "Contact", contact_path %></li>
+          <!-- ERB: Tạo liên kết đến trang Contact. -->
+          <li><%= link_to "Sign up", signup_path %></li> 
+          <!-- ERB: Tạo liên kết đến trang đăng ký. -->
+          <li><%= link_to "Log in", '#'%></li>
+          <!-- ERB: Tạo liên kết đến trang đăng nhập (hiện tại là `#`, chưa có URL thực). --> 
         </ul>
       </nav>
     </div>

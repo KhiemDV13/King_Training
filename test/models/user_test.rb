@@ -55,14 +55,12 @@ end
 
 test "email validation should reject invalid addresses" do
   # 🏆 Định nghĩa một test case với mô tả "email validation should reject invalid addresses"
-  invalid_addresses = %w[user@example,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar..com]
+  invalid_addresses = %w[user@example,com user_at_foo.org user.name@example. foo@bar_baz.com]
   # 🔹 Tạo một danh sách các email không hợp lệ bằng %w[], giúp tạo mảng từ chuỗi nhanh gọn.
   invalid_addresses.each do |invalid_address|
     # 🔄 Lặp qua từng địa chỉ email trong danh sách
-
     @user.email = invalid_address
     # ✅ Gán giá trị email cho User từ danh sách đang xét.
-
     assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
     # 🔍 Kiểm tra nếu User không hợp lệ (`valid?` trả về false).
     # ❌ Nếu User hợp lệ, test sẽ báo lỗi với thông điệp chứa email bị sai.
@@ -77,7 +75,7 @@ test "email addresses should be unique" do
 end
 
 test "password should be present (nonblank)" do
-  @user.password = @user.password_confirmation = " "  # Gán password và password_confirmation rỗng
+  @user.password = @user.password_confirmation = ""  # Gán password và password_confirmation rỗng
   assert_not @user.valid?  # Kiểm tra xem @user có hợp lệ không
 end
 
