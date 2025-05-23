@@ -5,7 +5,7 @@
 
     <div class="container">
     <!-- Bootstrap: Dùng `.container` để căn giữa nội dung và giới hạn chiều rộng của thanh navbar. -->
-      <%= link_to "Training App", '#', id: "logo" %>
+      <%= link_to "Training App", root_path, id: "logo" %>
       <!-- ERB: Dùng `link_to` để tạo một liên kết đến trang chính (hiện tại là `#`, placeholder).
            - `"sample app"`: Văn bản hiển thị trong liên kết.
            - `id: "logo"`: Gán ID `"logo"` để có thể tùy chỉnh bằng CSS. -->
@@ -23,13 +23,13 @@
           <!-- ERB: Tạo liên kết đến trang Home (hiện tại là `#`, chưa có URL thực). -->
           <li><%= link_to "Help", help_path %> |</li>
           <!-- ERB: Tạo liên kết đến trang Help. -->
-          <li><%= link_to "About", about_path %></li>
+          <li><%= link_to "About", about_path %> |</li>
           <!-- ERB: Tạo liên kết đến trang about. -->
-          <li><%= link_to "Contact", contact_path %></li>
+          <li><%= link_to "Contact", contact_path %> |</li>
           <!-- ERB: Tạo liên kết đến trang Contact. -->
-          <li><%= link_to "Sign up", signup_path %></li> 
+          <li><%= link_to "Sign up", signup_path %> |</li> 
           <!-- ERB: Tạo liên kết đến trang đăng ký. -->
-          <li><%= link_to "Log in", '#'%></li>
+          <li><%= link_to "Log in", login_path%></li>
           <!-- ERB: Tạo liên kết đến trang đăng nhập (hiện tại là `#`, chưa có URL thực). --> 
         </ul>
       </nav>

@@ -1,0 +1,25 @@
+<% provide(:title, "Log In") %>  <!-- 🟢 Cung cấp tiêu đề cho trang đăng nhập -->
+<h1>Login</h1>  <!-- 🟢 Tiêu đề trang đăng nhập -->
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <%= render 'shared/error_messages', object: @user %>  <!-- 🔴 Hiển thị lỗi nếu có -->
+
+    <%= form_with(url: login_path, local: true) do |f| %>  
+      <!-- 🟢 Form đăng nhập, gửi request đến `sessions#create` -->
+      <!-- 🟢 `url: login_path` chỉ định form gửi dữ liệu đến route `/login` -->
+      <!-- 🟢 `local: true` gửi request theo cách truyền thống (không AJAX) -->
+
+      <%= f.label :email %>  <!-- 🟢 Hiển thị nhãn "Email" -->
+      <%= f.email_field :email, class: "form-control" %>  
+      <!-- 🟢 Ô nhập email, trình duyệt kiểm tra định dạng trước khi gửi -->
+
+      <%= f.label :password %>  <!-- 🟢 Hiển thị nhãn "Password" -->
+      <%= f.password_field :password, class: "form-control" %>  
+      <!-- 🟢 Ô nhập mật khẩu, nội dung nhập vào sẽ bị ẩn (`type="password"`) -->
+
+      <%= f.submit "Login", class: "btn btn-primary" %>  
+      <!-- 🟢 Nút đăng nhập, gửi form khi nhấn -->
+    <% end %>
+  </div>
+</div>

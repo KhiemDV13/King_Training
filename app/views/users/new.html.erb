@@ -1,3 +1,49 @@
 <% provide(:title, 'Sign up') %>
-<h1>Sign up</h1>
-<p>This will be a signup page for new users.</p>
+<h1>Sign Up</h1>  <!-- 🟢 Tiêu đề chính của trang đăng ký -->
+
+<div class="row">
+  <div class="col-md-6 mx-auto">  <!-- 🟢 Sử dụng Bootstrap để căn giữa form trên màn hình -->
+
+    <%= render 'shared/error_messages', object: @user %>  
+    <!-- 🔴 Hiển thị thông báo lỗi nếu có -->
+    <!-- 🔴 `render 'shared/error_messages'` gọi đến partial `_error_messages.html.erb` -->
+    <!-- 🔴 `object: @user` giúp partial biết lấy lỗi từ model `@user.errors` -->
+
+    <!-- 🟢 Tạo form đăng ký, liên kết với model @user -->
+    <%= form_with(model: @user, local: true) do |f| %>  
+    <!-- 🔹 `form_with` giúp tạo form dựa trên model `User`, Rails tự xử lý submit -->
+    <!-- 🔹 `model: @user` tự động thiết lập đường dẫn `/users` (POST) hoặc `/users/:id` (PATCH) -->
+    <!-- 🔹 `local: true` gửi request theo cách truyền thống (không dùng AJAX) -->
+    <!-- 🔹 Nếu `local: false`, Rails sẽ gửi request bằng AJAX (tải lại một phần, không tải toàn bộ trang) -->
+
+      <!-- 🔹 Trường nhập tên -->
+      <%= f.label :name, "Tên của bạn" %>  <!-- 🟢 Hiển thị nhãn "Name" -->
+      <%= f.text_field :name, class: "form-control" %>  
+      <!-- 🟢 `form-control` là class của Bootstrap giúp input đẹp hơn -->
+      <!-- 🟢 Bootstrap tự động thêm padding, border, và kiểu dáng phù hợp cho form -->
+
+      <!-- 🔹 Trường nhập email -->
+      <%= f.label :email, "Email của bạn" %>  <!-- 🟢 Hiển thị nhãn "Email" -->
+      <%= f.email_field :email, class: "form-control" %>  
+      <!-- 🟢 `email_field` tạo input với `type="email"`, trình duyệt kiểm tra định dạng email -->
+      <!-- 🟢 `form-control` giúp input hiển thị đẹp hơn với kiểu Bootstrap -->
+
+      <!-- 🔹 Trường nhập mật khẩu -->
+      <%= f.label :password %>  <!-- 🟢 Hiển thị nhãn "Password" -->
+      <%= f.password_field :password, class: "form-control" %>  
+      <!-- 🟢 `password_field` tạo input với `type="password"` để ẩn nội dung nhập vào -->
+      <!-- 🟢 `form-control` giúp input đồng nhất với giao diện Bootstrap -->
+
+      <!-- 🔹 Trường nhập xác nhận mật khẩu -->
+      <%= f.label :password_confirmation, "Confirmation" %>  <!-- 🟢 Hiển thị nhãn xác nhận mật khẩu -->
+      <%= f.password_field :password_confirmation, class: "form-control" %>  
+      <!-- 🟢 Rails tự động kiểm tra nếu `password_confirmation` không trùng với `password` -->
+      <!-- 🟢 `form-control` giúp input có kiểu dáng đẹp giống các input khác -->
+
+      <!-- 🔹 Nút submit -->
+      <%= f.submit "Create my account", class: "btn btn-primary" %>  
+      <!-- 🟢 Khi nhấn nút này, form sẽ gửi dữ liệu đến `UsersController#create` -->
+      <!-- 🟢 `btn-primary` là class Bootstrap giúp nút có nền xanh dương đẹp mắt -->
+    <% end %>
+  </div>
+</div>

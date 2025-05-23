@@ -1,0 +1,29 @@
+<% if object.errors.any? %>  
+  <!-- 🔹 Kiểm tra nếu object (model) có lỗi hay không -->
+  <!-- 🔹 `errors.any?` trả về `true` nếu có lỗi validation -->
+  <!-- 🔹 Nếu có lỗi, hiển thị danh sách lỗi -->
+  
+  <div class="alert alert-danger">  
+    <!-- 🟢 Hiển thị thông báo lỗi dạng cảnh báo (Bootstrap `alert-danger`) -->
+    
+    <h2><%= pluralize(object.errors.count, "error") %> prevented this form from being saved:</h2>  
+    <!-- 🟢 Hiển thị số lượng lỗi -->
+    <!-- 🟢 `pluralize(object.errors.count, "error")` giúp tự động thêm "errors" nếu có nhiều lỗi -->
+    <!-- 🟢 Ví dụ: "2 errors prevented this form from being saved:" -->
+
+    <ul>  
+      <% object.errors.full_messages.each do |msg| %>  
+        <!-- 🔹 Duyệt qua danh sách lỗi validation -->
+        <!-- 🔹 `full_messages` trả về danh sách lỗi theo định dạng dễ đọc -->
+        <!-- 🔹 Ví dụ: ["Name can't be blank", "Email is invalid"] -->
+
+        <li><%= msg %></li>  
+        <!-- 🟢 Hiển thị từng lỗi dưới dạng danh sách `<li>` -->
+      <% end %>  
+    </ul>  
+  </div>  
+<% end %>  
+<!-- 🔹 Kết thúc điều kiện kiểm tra lỗi -->
+<!-- 🔹 Nếu không có lỗi, không hiển thị gì cả -->
+<!-- 🔹 `object` là biến được truyền vào từ controller, thường là một instance của model (như User) --  
+<!-- 🔹 `object.errors` chứa danh sách lỗi validation của model -->

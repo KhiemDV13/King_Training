@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
+  get "sessions/new"
+  get "sessions/create"
+  get "sessions/destroy"
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Defines the root path route ("/")
+  # root "articles#index"
   resources :articles
+  resources :users
+  resources :sessions
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -22,4 +30,7 @@ Rails.application.routes.draw do
   get "/about", to: "static_pages#about"
   get "/contact", to: "static_pages#contact"
   get "/signup", to: "users#new"
+  get "/login", to: "sessions#new"      # 🟢 Hiển thị form đăng nhập
+  post "/login", to: "sessions#create"  # 🟢 Xử lý đăng nhập
+  delete "/logout", to: "sessions#destroy"  # 🟢 Đăng xuất
 end
