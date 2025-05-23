@@ -1,0 +1,45 @@
+<% provide(:title, @user.name) %>  
+<!-- 🟢 Đặt tiêu đề trang thành tên của user -->
+<!-- 🟢 `provide(:title, @user.name)` giúp truyền giá trị `@user.name` vào layout -->
+<!-- 🟢 Khi sử dụng `<%= yield(:title) %>` trong `application.html.erb`, tiêu đề này sẽ hiển thị -->
+
+<div class="row">  
+  <!-- 🟢 Tạo một hàng (`row`), dùng Bootstrap để căn chỉnh nội dung -->
+  
+  <aside class="col-md-4">  
+    <!-- 🟢 Tạo sidebar với độ rộng 4 cột trên màn hình medium (`md`) -->
+    
+    <section class="user_info">  
+      <!-- 🟢 Phần hiển thị thông tin user -->
+      
+      <h1>  
+        <%= gravatar_for @user %>  
+        <!-- 🟢 Gọi `gravatar_for(@user)` để hiển thị ảnh đại diện Gravatar của user -->
+        
+        <%= @user.name %>  
+        <!-- 🟢 Hiển thị tên của user -->
+      </h1>  
+    </section>  
+  </aside>  
+</div>  
+
+<% if @user.microposts.any? %>  
+  <!-- 🔹 Kiểm tra xem user có bài viết (`microposts`) hay không -->
+  
+  <h5>Microposts</h5>  
+  <!-- 🟢 Tiêu đề danh sách microposts -->
+  
+  <ul>  
+    <% @user.microposts.each do |micropost| %>  
+      <!-- 🔹 Duyệt qua danh sách microposts của user -->
+      
+      <li><%= micropost.content %></li>  
+      <!-- 🟢 Hiển thị nội dung của từng micropost -->
+    <% end %>  
+  </ul>  
+<% else %>  
+  <!-- 🔴 Nếu user chưa có bài viết, hiển thị thông báo -->
+  
+  <p><em>This user has no microposts.</em></p>  
+  <!-- 🟢 Hiển thị thông báo "User chưa có microposts" -->
+<% end %>  

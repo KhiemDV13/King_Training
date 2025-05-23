@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Khai báo rằng tài liệu này sử dụng tiêu chuẩn HTML5. -->
+<!-- 🟢 Khai báo rằng tài liệu này sử dụng tiêu chuẩn HTML5. -->
 <html>
 
 <head>
@@ -7,46 +7,66 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <title><%= full_title(yield(:title)) %></title>
-  <!-- ERB: Gọi phương thức `full_title(yield(:title))` để tạo tiêu đề trang động.
-       `yield(:title)` lấy giá trị tiêu đề từ từng trang con (`home.html.erb`, `about.html.erb`, v.v.). -->
+  <!-- 🟢 Gọi phương thức `full_title(yield(:title))` để tạo tiêu đề trang động. -->
   <meta charset="utf-8">
-  <!-- Include Bootstrap  CSS and JS -->
-  <!-- Bootstrap: Thư viện CSS và JS giúp tạo giao diện đẹp và tương tác mượt mà. --> 
-  <!-- Sử dụng CDN để tải Bootstrap từ jsDelivr. -->
-  <!-- CDN: Tải Bootstrap từ jsDelivr, giúp giảm thời gian tải trang. -->
-  <!-- `integrity` và `crossorigin` là các thuộc tính bảo mật giúp đảm bảo tệp tải xuống không bị thay đổi. -->
-  <!-- `integrity`: Kiểm tra tính toàn vẹn của tệp tải xuống. -->
-  <!-- `crossorigin`: Xác định cách trình duyệt xử lý các yêu cầu CORS (Cross-Origin Resource Sharing). -->
-  <!-- `rel`: Xác định mối quan hệ giữa tài liệu hiện tại và tài liệu được liên kết. -->
-  <!-- `href`: Đường dẫn đến tệp CSS hoặc JS. -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-  <!-- Định dạng ký tự là UTF-8, giúp hiển thị tiếng Việt, tiếng Anh và các ký tự đặc biệt đúng cách. -->
+  
+  <!-- 🟢 Include Bootstrap CSS và JS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" 
+        crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" 
+          integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" 
+          crossorigin="anonymous"></script>
+
+  <!-- 🟢 Rails bảo vệ chống CSRF -->
   <%= csrf_meta_tags %>
-  <!-- ERB: Rails tự động tạo meta tags để bảo vệ trang khỏi tấn công CSRF (Cross-Site Request Forgery). -->
   <%= csp_meta_tag %>
-  <!-- ERB: Bảo vệ trang web khỏi các tấn công XSS (Cross-Site Scripting) bằng cách kiểm soát nội dung được tải. -->
+
+  <!-- 🟢 Nhúng stylesheet và JavaScript -->
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <!-- ERB: Chèn file CSS `application.css`, giúp thiết kế giao diện trang web. 
-       `data-turbolinks-track: 'reload'` đảm bảo CSS được tải lại khi dùng Turbolinks. -->
-  <!-- ERB: Chèn file JavaScript `application.js` vào trang, xử lý hành vi và tương tác. -->
-  <!-- Nếu trình duyệt là Internet Explorer dưới phiên bản 9, tải thư viện hỗ trợ HTML5 -->
-  <!-- Điều này giúp IE cũ hiển thị đúng các thẻ HTML5. -->
+
+  <!-- 🟢 Kiểm tra hỗ trợ HTML5 cho IE cũ -->
   <!--[if lt IE 9]>
   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
   <![endif]-->
-  <%= render 'layouts/shim'%>
+  
+  <%= render 'layouts/shim' %>
 </head>
 
 <body>
-  <%= render 'layouts/header'%>
+  <%= render 'layouts/header' %>
+  <!-- 🟢 Chèn header vào trang, chứa logo và thanh điều hướng -->
+
   <div class="container">
-  <!-- Bootstrap: `.container` giúp căn giữa nội dung chính và tạo khoảng cách đẹp với lề trang. -->
+    <!-- 🟢 Kiểm tra xem người dùng có đang đăng nhập không -->
+    <% if current_user %>
+      <p>Welcome, <%= current_user.name %>!</p>
+      <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-danger" %>
+      <!-- 🟢 Nếu user đã đăng nhập, hiển thị tên và nút đăng xuất -->
+    <% else %>
+      <%= link_to "Login", login_path, class: "btn btn-primary" %>
+      <!-- 🟢 Nếu chưa đăng nhập, hiển thị nút đăng nhập -->
+    <% end %>
+
+    <!-- 🟢 Hiển thị thông báo flash -->
+    <% unless flash.empty? %>
+      <% flash.each do |key, message| %>
+        <div class="alert alert-<%= key == "success" ? "success" : "danger" %>">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <!-- 🟢 Hiển thị nội dung chính của từng trang -->
     <%= yield %>
-    <!-- ERB: `yield` sẽ hiển thị nội dung từ từng trang cụ thể (`home.html.erb`, `about.html.erb`, v.v.). -->
-    <%= render 'layouts/footer'%>
-    <!-- ERB: Chèn footer vào trang, chứa thông tin bản quyền và liên kết đến tài liệu. --> 
+
+    <!-- 🟢 Chèn footer -->
+    <%= render 'layouts/footer' %>
+
+    <!-- 🟢 Debug params nếu đang chạy môi trường `development` -->
+    <% if Rails.env.development? %>
+      <%= debug(params) %>
+    <% end %>
   </div>
 </body>
 </html>
-
